@@ -1,9 +1,8 @@
-.Solution {
+.Control {
     height: 100%;
     width: 100%;
     background-color: lightsteelblue;
     border-radius: 25px;
-    margin-left: 8px;
 }
 
 .form-container {

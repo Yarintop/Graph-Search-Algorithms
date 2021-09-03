@@ -5,6 +5,8 @@ import { getMazeGenerators, getSolvers } from "../algorithmLoader";
 export default {
     skip: false,
     paused: false,
+    weightCheck: false,
+    speed: 60,
     graphData: {
         clean: true,
         running: false,
@@ -22,9 +24,11 @@ export default {
         drawPath: false,
     },
     generationData: {
+        weighted: false,
         running: false,
         firstRun: true,
         queue: [],
+        extraParams: {}
     },
     algorithms: {
         generate: getMazeGenerators()[0],

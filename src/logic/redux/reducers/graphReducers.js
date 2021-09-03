@@ -5,10 +5,12 @@ import { toggleWall } from "../graphSlice";
 
 export default {
   clear: (state) => {
+    state.weightCheck = false;
+    state.generationData.weighted = false;
     state.graphData.walls = [];
     state.graphData.vertices.forEach((v) => {
       state.graphData.edges[v] = state.graphData.data[v].neighbors;
-      state.graphData.data[v].value = -1;
+      state.graphData.data[v].value = Math.floor(Math.random() * 100);
       if (
         state.graphData.data[v].type !== "start" &&
         state.graphData.data[v].type !== "end"
@@ -68,7 +70,7 @@ export default {
         state.graphData.data[v] = {
           type: "",
           neighbors: edges[v],
-          value: -1,
+          value: Math.floor(Math.random() * 100),
         };
     });
 

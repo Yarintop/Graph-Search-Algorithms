@@ -47,8 +47,10 @@ class Maze extends Component {
       },
       () => {
         this.props.onLoad(this.state.rows, this.state.columns);
-        this.props.putNode({type: "start", id: columns + 1});
-        this.props.putNode({type: "end", id: (rows - 1) * columns - 2});
+        // this.props.putNode({type: "start", id: columns + 1});
+        // this.props.putNode({type: "end", id: (rows - 1) * columns - 2});
+        this.props.putNode({type: "start", id: Math.floor((rows / 2 * columns) + (columns * 3) / 4)});
+        this.props.putNode({type: "end", id: Math.floor((rows / 2 * columns) + columns / 4)});
       }
     );
 

@@ -1,13 +1,23 @@
-import { removeEdge, restoreEdge } from "../../graphLogic";
+import { MAX_COST, MIN_COST, removeEdge, restoreEdge } from "../../graphLogic";
 import { generators, solvers } from "../../algorithmLoader";
-import { setAllWalls } from "../graphSlice";
 
 export default {
   generateMaze: (state) => {
+    if (state.paused) return; 
     if (!state.generationData.running) return;
     do {
+      if (state.generationData.weighted && state.generationData.firstRun) {
+        state.graphData.vertices.forEach((v) => {
+          if (v !== state.graphData.start && v !== state.graphData.end) {
+            state.graphData.data[v].value = Math.floor(Math.random() * (MAX_COST - MIN_COST) + MIN_COST);
+          } else {
+            state.graphData.data[v].value = Math.floor(Math.random() * 100);
+          }
+        });
+      }
+
       let f = generators[state.algorithms.generate];
-      let { newWalls, newPaths, running, generationData } = f(
+      let { newWalls, newPaths, running, generationData, extraParams } = f(
         state.graphData,
         state.generationData
       );
@@ -37,11 +47,12 @@ export default {
         };
       });
 
-      state.generationData = { ...generationData, running };
+      state.generationData = { ...generationData, running, extraParams };
     } while (state.skip && state.generationData.running);
   },
 
   solveStep: (state) => {
+    if (state.paused) return; 
     do {
       if (state.graphData.queue.length === 0) state.graphData.running = false;
       if (state.graphData.drawPath) {

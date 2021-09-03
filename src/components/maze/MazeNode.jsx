@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleWall } from "../../logic/redux/graphSlice";
-import { Paper } from "@material-ui/core";
+import { FormControlLabel, Paper } from "@material-ui/core";
 import "./MazeNode.css";
 
 const getCSS = (type) => {
@@ -32,8 +32,13 @@ const MazeNode = (props) => {
   const dispatch = useDispatch();
   let nodeState = useSelector(
     (state) => state.graph.graphData.data[props.id],
-    (oldVal, newVal) => oldVal.type === newVal.type && oldVal.value == newVal.value
+    (oldVal, newVal) =>
+      oldVal.type === newVal.type && oldVal.value == newVal.value
   );
+  let weighted = useSelector(
+    (state) => state.graph.generationData.weighted
+  );
+  console.log(weighted);
   return (
     <Paper
       id={props.id}
@@ -43,7 +48,13 @@ const MazeNode = (props) => {
         dispatch(toggleWall(props.id));
       }}
       elevation={1}
-    ></Paper>
+    >
+      {weighted &&
+      (nodeState.type === "" || nodeState.type === "visited") &&
+      nodeState.value > -1
+        ? nodeState.value
+        : undefined}
+    </Paper>
   );
 };
 

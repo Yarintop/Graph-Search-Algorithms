@@ -1,8 +1,10 @@
+import { MAX_COST, MIN_COST } from "../graphLogic";
 import { putNode, setAllWalls } from "../redux/graphSlice";
 
 const kruskal = (graphData, generationData) => {
   let { start, end, vertices, walls } = graphData;
-  let { firstRun, queue, running } = generationData;
+  let { firstRun, queue, running, weighted } = generationData;
+
 
   let newWalls = [];
   let newPaths = [];
@@ -10,6 +12,9 @@ const kruskal = (graphData, generationData) => {
   if (firstRun) {
     vertices.forEach((v) => {
       if (v !== start && v !== end) {
+        if (weighted) {
+          graphData.data[v].value = Math.floor(Math.random() * 100);
+        }
         newWalls.push(v);
       }
     });

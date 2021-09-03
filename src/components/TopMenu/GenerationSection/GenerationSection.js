@@ -1,6 +1,8 @@
 import {
   Button,
+  Checkbox,
   FormControl,
+  FormControlLabel,
   Grid,
   InputLabel,
   Select,
@@ -15,6 +17,7 @@ import {
   setAlgorithm,
   setAllWalls,
   setIntervalId,
+  setWeighted,
 } from "../../../logic/redux/graphSlice";
 import "./GenerationSection.css";
 
@@ -33,25 +36,27 @@ const getGenerationAlgorithms = () => {
   return selectAlgorithms;
 };
 
-const startGenerating = (dispatch, runningGenerator, oldTimer) => {
+const startGenerating = (dispatch, runningGenerator, speed) => {
   if (!runningGenerator) return;
+  console.log(speed);
   var intervalId = setInterval(() => {
     dispatch(generateMaze());
-  }, 1);
+  }, speed);
   return intervalId;
 };
 
 const GenerationSection = (props) => {
   const dispatch = useDispatch();
+  const isWeighted = useSelector((state) => state.graph.weightCheck);
   const currentGenerator = useSelector(
     (state) => state.graph.algorithms.generate
   );
-  const runningGenerator = useSelector((state) => state.graph.generationData.running);
-  const oldTimer = useSelector(
-    (state) => state.graph.intervalId.generate,
-    () => true
+  const runningGenerator = useSelector(
+    (state) => state.graph.generationData.running
   );
-  let intervalId = startGenerating(dispatch, runningGenerator, oldTimer);
+  const runningSolution = useSelector((state) => state.graph.graphData.running);
+  const speed = useSelector((state) => state.graph.speed);
+  let intervalId = startGenerating(dispatch, runningGenerator, speed);
   dispatch(setIntervalId({ type: "generate", value: intervalId }));
   return (
     <div className="Generation">
@@ -61,15 +66,18 @@ const GenerationSection = (props) => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <FormControl variant="filled" className="select">
             <InputLabel htmlFor="generationAlgorithm">Algorithm</InputLabel>
             <Select
+              disabled={runningGenerator || runningSolution}
               native
               value={currentGenerator}
               id="generationAlgorithm"
               onChange={(e) => {
-                dispatch(setAlgorithm({ type:'generate', algorithm: e.target.value}));
+                dispatch(
+                  setAlgorithm({ type: "generate", algorithm: e.target.value })
+                );
               }}
             >
               {getGenerationAlgorithms()}
@@ -78,16 +86,31 @@ const GenerationSection = (props) => {
         </Grid>
         <Grid item xs={3}>
           <Button
+            disabled={runningGenerator || runningSolution}
             variant="contained"
             onClick={(e) => {
               // dispatch(generateMaze());
               dispatch(reset());
               dispatch(clear());
-              dispatch(generate());
+              dispatch(generate(isWeighted));
             }}
           >
             Generate
           </Button>
+        </Grid>
+        <Grid item xs={3}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                disabled={runningGenerator || runningSolution}
+                checked={isWeighted}
+                onChange={(e) =>
+                  dispatch(setWeighted({ isWeighted: e.target.checked }))
+                }
+              />
+            }
+            label="Weighted"
+          />
         </Grid>
       </Grid>
     </div>

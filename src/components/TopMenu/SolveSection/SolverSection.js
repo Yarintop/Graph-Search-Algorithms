@@ -31,24 +31,27 @@ const getSolveAlgorithms = () => {
   return selectAlgorithms;
 };
 
-const startSolving = (dispatch, runningSolution, oldTimer) => {
+const startSolving = (dispatch, runningSolution, speed) => {
   if (!runningSolution) return;
-  var temp = 0;
   const intervalId = setInterval(() => {
     dispatch(solveStep());
-  }, 1);
+  }, speed);
   return intervalId;
 };
 
 const SolveSection = (props) => {
   const dispatch = useDispatch();
   const currentSolver = useSelector((state) => state.graph.algorithms.solve);
+  const runningGenerator = useSelector(
+    (state) => state.graph.generationData.running
+  );
   const runningSolution = useSelector((state) => state.graph.graphData.running);
   const oldTimer = useSelector(
     (state) => state.graph.intervalId.solve,
     () => true
   );
-  let intervalId = startSolving(dispatch, runningSolution, oldTimer);
+  let speed = useSelector((state) => state.graph.speed);
+  let intervalId = startSolving(dispatch, runningSolution, speed);
   dispatch(setIntervalId({ type: "solve", value: intervalId }));
   return (
     <div className="Solution">
@@ -62,11 +65,14 @@ const SolveSection = (props) => {
           <FormControl variant="filled" className="select">
             <InputLabel htmlFor="generationAlgorithm">Algorithm</InputLabel>
             <Select
+              disabled={runningGenerator || runningSolution}
               native
               value={currentSolver}
               id="generationAlgorithm"
               onChange={(e) => {
-                dispatch(setAlgorithm({ algorithm: e.target.value }));
+                dispatch(
+                  setAlgorithm({ type: "solve", algorithm: e.target.value })
+                );
               }}
             >
               {getSolveAlgorithms()}
@@ -75,6 +81,7 @@ const SolveSection = (props) => {
         </Grid>
         <Grid item xs={3}>
           <Button
+            disabled={runningGenerator || runningSolution}
             variant="contained"
             onClick={(e) => {
               dispatch(reset());

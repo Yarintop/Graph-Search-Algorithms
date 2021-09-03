@@ -24,7 +24,12 @@ export const {
     reset,
     generate,
     solveStep,
-    solve
+    solve,
+    setWeighted,
+    pause,
+    unpause,
+    skipToggle,
+    setSpeed,
 } = graphSlice.actions;
 
 export default graphSlice.reducer;

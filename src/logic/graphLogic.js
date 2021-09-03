@@ -1,3 +1,4 @@
+export const MIN_COST = 0, MAX_COST = 100;
 
 function generateGraph(rows, columns) {
   let vertices = [];
@@ -39,4 +40,4 @@ const restoreEdge = (e, neighbors, walls, node) => {
   return edges;
 }
 
-export { generateGraph, removeEdge, restoreEdge};
+export { generateGraph, removeEdge, restoreEdge, };
