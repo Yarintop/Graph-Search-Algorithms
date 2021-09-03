@@ -34,10 +34,8 @@ const getGenerationAlgorithms = () => {
 };
 
 const startGenerating = (dispatch, runningGenerator, oldTimer) => {
-  clearInterval(oldTimer);
   if (!runningGenerator) return;
-  console.log(runningGenerator);
-  const intervalId = setInterval(() => {
+  var intervalId = setInterval(() => {
     dispatch(generateMaze());
   }, 1);
   return intervalId;
@@ -46,7 +44,7 @@ const startGenerating = (dispatch, runningGenerator, oldTimer) => {
 const GenerationSection = (props) => {
   const dispatch = useDispatch();
   const currentGenerator = useSelector(
-    (state) => state.graph.generationData.generationAlgorithm
+    (state) => state.graph.algorithms.generate
   );
   const runningGenerator = useSelector((state) => state.graph.generationData.running);
   const oldTimer = useSelector(
@@ -71,7 +69,7 @@ const GenerationSection = (props) => {
               value={currentGenerator}
               id="generationAlgorithm"
               onChange={(e) => {
-                dispatch(setAlgorithm({ algorithm: e.target.value }));
+                dispatch(setAlgorithm({ type:'generate', algorithm: e.target.value}));
               }}
             >
               {getGenerationAlgorithms()}

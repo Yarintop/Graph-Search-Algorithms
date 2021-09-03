@@ -18,8 +18,8 @@
     background-color: DodgerBlue !important;
 }
 
-.seen {
-    background-color: gray !important;
+.visited {
+    background-color: lightgray !important;
 }
 
 .path {

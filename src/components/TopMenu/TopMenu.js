@@ -7,6 +7,8 @@ export default (props) => {
       <div className="TopMenu">
         <div className="GenerationSection">
         <GenerationSection />
+        </div>
+        <div className="SolveSection">
         <SolveSection />
         </div>
       </div>

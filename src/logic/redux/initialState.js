@@ -1,9 +1,10 @@
 import { kruskal } from "../mazeGeneration/kruskal";
-import { getMazeGenerators } from "../algorithmLoader";
+import { getMazeGenerators, getSolvers } from "../algorithmLoader";
 
 
 export default {
     skip: false,
+    paused: false,
     graphData: {
         clean: true,
         running: false,
@@ -15,16 +16,19 @@ export default {
         walls: [],
         start: -1,
         end: -1,
+        parents: {},
+        visited: [],
+        queue: [],
+        drawPath: false,
     },
     generationData: {
         running: false,
-        queue: [],
         firstRun: true,
-        generationAlgorithm: getMazeGenerators()[0],
+        queue: [],
     },
     algorithms: {
-        solve: undefined,
-        generate: getMazeGenerators()[0]
+        generate: getMazeGenerators()[0],
+        solve: getSolvers()[0],
     },
     intervalId: {
         generate: undefined,

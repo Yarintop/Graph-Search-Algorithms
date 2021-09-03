@@ -16,8 +16,8 @@ const getCSS = (type) => {
     case "wall":
       cls += " wall";
       break;
-    case "seen":
-      cls += " seen";
+    case "visited":
+      cls += " visited";
       break;
     case "path":
       cls += " path";

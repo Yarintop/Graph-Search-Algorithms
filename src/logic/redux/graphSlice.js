@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import initialState from "./initialState";
 import controlReducers from "./reducers/controlReducers";
-import generationReducers from "./reducers/generationReducers";
+import generationReducers from "./reducers/algorithmReducers";
 import graphReducers from "./reducers/graphReducers";
 
 export const graphSlice = createSlice({
@@ -23,6 +23,8 @@ export const {
     setIntervalId,
     reset,
     generate,
+    solveStep,
+    solve
 } = graphSlice.actions;
 
 export default graphSlice.reducer;

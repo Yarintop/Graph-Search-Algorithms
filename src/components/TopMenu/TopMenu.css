@@ -6,4 +6,11 @@
 .GenerationSection {
     width: 33%;
     height: 100%;
+    float: left;
+}
+
+.SolveSection {
+    width: 33%;
+    height: 100%;
+    float: left;
 }

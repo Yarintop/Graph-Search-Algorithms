@@ -7,13 +7,13 @@ function generateGraph(rows, columns) {
       let id = r * columns + c;
       vertices.push(id);
       if (edges[id] === undefined) edges[id] = [];
-      if (id - 1 >= 0) {
+      if (id - 1 >= 0 && id % columns !== 0) {
         edges[id].push(id - 1);
         edges[id - 1].push(id);
       }
-      if (id - rows >= 0) {
-        edges[id].push(id - rows);
-        edges[id - rows].push(id);
+      if (id - columns >= 0) {
+        edges[id].push(id - columns);
+        edges[id - columns].push(id);
       }
     }
   }
