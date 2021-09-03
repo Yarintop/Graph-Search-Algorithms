@@ -1,9 +1,6 @@
 export default {
-  pause: (state) => {
-    state.paused = true;
-  },
-  unpause: (state) => {
-    state.paused = false;
+  pauseToggle: (state) => {
+    state.paused = !state.paused;
   },
   skipToggle: (state) => {
     state.skip = !state.skip;

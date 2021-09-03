@@ -10,7 +10,7 @@ export default {
     state.graphData.walls = [];
     state.graphData.vertices.forEach((v) => {
       state.graphData.edges[v] = state.graphData.data[v].neighbors;
-      state.graphData.data[v].value = Math.floor(Math.random() * 100);
+      state.graphData.data[v].value = -1;
       if (
         state.graphData.data[v].type !== "start" &&
         state.graphData.data[v].type !== "end"
@@ -70,7 +70,7 @@ export default {
         state.graphData.data[v] = {
           type: "",
           neighbors: edges[v],
-          value: Math.floor(Math.random() * 100),
+          value: -1,
         };
     });
 

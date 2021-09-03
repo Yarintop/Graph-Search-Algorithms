@@ -11,7 +11,7 @@ export default {
           if (v !== state.graphData.start && v !== state.graphData.end) {
             state.graphData.data[v].value = Math.floor(Math.random() * (MAX_COST - MIN_COST) + MIN_COST);
           } else {
-            state.graphData.data[v].value = Math.floor(Math.random() * 100);
+            state.graphData.data[v].value = 0;
           }
         });
       }

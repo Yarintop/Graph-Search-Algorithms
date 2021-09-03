@@ -26,8 +26,7 @@ export const {
     solveStep,
     solve,
     setWeighted,
-    pause,
-    unpause,
+    pauseToggle,
     skipToggle,
     setSpeed,
 } = graphSlice.actions;

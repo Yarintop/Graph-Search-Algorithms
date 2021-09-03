@@ -9,16 +9,12 @@ import {
   Slider,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { clear, pause, setSpeed, skipToggle } from "../../../logic/redux/graphSlice";
+import { clear, pause, pauseToggle, reset, setSpeed, skipToggle } from "../../../logic/redux/graphSlice";
 import "./ControlSection.css";
 
 const ControlSection = (props) => {
   const dispatch = useDispatch();
-  const isWeighted = useSelector((state) => state.graph.weightCheck);
-  const runningGenerator = useSelector(
-    (state) => state.graph.generationData.running
-  );
-  const runningSolution = useSelector((state) => state.graph.graphData.running);
+  const isPaused = useSelector((state) => state.graph.paused)
   const isSkip = useSelector((state) => state.graph.skip);
   return (
     <div className="Control">
@@ -32,17 +28,18 @@ const ControlSection = (props) => {
           <Button
             variant="contained"
             onClick={(e) => {
-              dispatch(pause());
+              dispatch(pauseToggle());
             }}
           >
-            Pause
+              {isPaused ? 'Resume' : 'Pause'}
           </Button>
         </Grid>
         <Grid item xs={3}>
           <Button
             variant="contained"
             onClick={(e) => {
-              dispatch(clear());
+                dispatch(reset());
+                dispatch(clear());
             }}
           >
             Clear
