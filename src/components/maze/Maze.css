@@ -1,0 +1,8 @@
+.maze-board {
+    background-color: cyan;
+    position: relative;
+}
+
+.row {
+    padding: 1.8;
+}

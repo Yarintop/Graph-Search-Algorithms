@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Maze from "./components/maze/Maze";
+import { useDispatch } from "react-redux";
+import { updateGraph } from "./logic/redux/graphSlice";
+import { generateGraph } from "./logic/graphLogic";
+import TopMenu from "./components/TopMenu/TopMenu";
 
 function App() {
+  const dispatch = useDispatch();
+  let centerWidth = window.screen.width * 0.765;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="center" style={{ width: centerWidth }}>
+        <div className="upperMenu">
+          <div style={{ height: 100 }}>
+            <TopMenu />
+          </div>
+        </div>
+        <Maze
+          className="maze"
+          onLoad={(rows, columns) =>
+            dispatch(updateGraph(generateGraph(rows, columns)))
+          }
+        />
+      </div>
+    </>
   );
 }
 
