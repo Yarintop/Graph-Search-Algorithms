@@ -40,6 +40,8 @@ class Maze extends Component {
     // let screenWidth = window.innerWidth;
     let screenHeight = window.innerHeight;
     let rows = Math.floor(screenHeight / this.L) + 1;
+    if (rows > 40)
+      rows = 40;
     let columns = Math.floor(screenWidth / this.L);
     this.setState(
       {
