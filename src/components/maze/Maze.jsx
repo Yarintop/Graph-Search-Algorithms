@@ -36,7 +36,8 @@ class Maze extends Component {
   }
 
   initializeMaze = () => {
-    let screenWidth = window.innerWidth;
+    let screenWidth = 1920;
+    // let screenWidth = window.innerWidth;
     let screenHeight = window.innerHeight;
     let rows = Math.floor(screenHeight / this.L) + 1;
     let columns = Math.floor(screenWidth / this.L);
@@ -82,7 +83,7 @@ class Maze extends Component {
   render() {
     return (
       <>
-        <Grid container justifyContent="center" className="maze-board">
+        <Grid container justifyContent="center" className="maze-board" direction="row">
           {this.getCells(this.state.rows, this.state.columns)}
         </Grid>
       </>

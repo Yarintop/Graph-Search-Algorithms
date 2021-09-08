@@ -1,6 +1,7 @@
 .maze-board {
     background-color: cyan;
     position: relative;
+    width: 1465px !important;
 }
 
 .row {
