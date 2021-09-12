@@ -28,7 +28,7 @@ export default {
       solve: undefined,
     };
     state.graphData.visited.forEach((v) => {
-      if (v !== state.graphData.start && v !== state.graphData.end) {
+      if (v !== state.graphData.start && v !== state.graphData.end && state.graphData.data[v].type !== "wall") {
         state.graphData.data[v].type = "";
       }
     });
@@ -74,7 +74,7 @@ export default {
   },
 
   solve: (state) => {
-    console.log(JSON.parse(JSON.stringify(state)));
+    // console.log(JSON.parse(JSON.stringify(state)));
     state.generationData.running = false;
     state.graphData = {
       ...state.graphData,

@@ -29,6 +29,7 @@ export const {
     pauseToggle,
     skipToggle,
     setSpeed,
+    selectNode,
 } = graphSlice.actions;
 
 export default graphSlice.reducer;

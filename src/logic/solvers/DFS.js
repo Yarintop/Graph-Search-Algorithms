@@ -2,7 +2,7 @@ const DFS = (graphData) => {
   let { queue, visited, parents, edges, start, end, running } = graphData;
 
   let currV = queue.shift();
-  console.log("s " + start);
+  // console.log("s " + start);
 
   let neighbors = getNotVisitedNeighbors(currV, edges, visited, queue, start);
 

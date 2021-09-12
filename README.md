@@ -25,4 +25,4 @@ Using BFS, DFS or Dijkstra, this web application animates the proccess in a fun 
 
 ## TODO
 
-Add an option to give the user the freedom to move the start and end points anywhere.
+Add a few more Solving Algorithms

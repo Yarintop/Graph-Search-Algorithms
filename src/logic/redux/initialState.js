@@ -3,6 +3,7 @@ import { getMazeGenerators, getSolvers } from "../algorithmLoader";
 
 
 export default {
+    selectedNode: undefined,
     skip: false,
     paused: false,
     weightCheck: false,
@@ -10,8 +11,8 @@ export default {
     graphData: {
         clean: true,
         running: false,
-        width: 0,
-        height: 0,
+        rows: 0,
+        columns: 0,
         vertices: [],
         edges: {},
         data: {},

@@ -5,6 +5,7 @@ import DFSGenerator from './mazeGeneration/DFS';
 import random from "./mazeGeneration/random";
 import Prim from "./mazeGeneration/Prim";
 import Dijkstra from "./solvers/Dijkstra";
+import aStar from "./solvers/aStar";
 
 const generators = {
   "kruskal": kruskal,
@@ -17,6 +18,7 @@ const solvers = {
   BFS,
   DFS,
   Dijkstra,
+  aStar
 }
 
 const getMazeGenerators = () => {

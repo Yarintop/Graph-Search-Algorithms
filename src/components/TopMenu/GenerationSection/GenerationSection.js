@@ -38,7 +38,7 @@ const getGenerationAlgorithms = () => {
 
 const startGenerating = (dispatch, runningGenerator, speed) => {
   if (!runningGenerator) return;
-  console.log(speed);
+  // console.log(speed);
   var intervalId = setInterval(() => {
     dispatch(generateMaze());
   }, speed);

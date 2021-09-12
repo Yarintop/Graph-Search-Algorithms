@@ -1,5 +1,4 @@
 import { removeEdge, restoreEdge } from "../../graphLogic";
-import { toggleWall } from "../graphSlice";
 
 //JSON.parse(JSON.stringify())) to read proxy
 
@@ -28,7 +27,20 @@ export default {
     else if (type === "end") state.graphData["end"] = id;
   },
 
+  selectNode: (state, action) => {
+    if (state.graphData.running || state.generationData.running) return;
+    let id = action.payload;
+    if (state.selectedNode !== undefined) {
+      state.graphData.data[state.selectedNode].type = state.graphData.data[state.selectedNode].type.replace("_s", "");
+      state.selectedNode = undefined;
+    }
+    if (id === state.graphData.start) state.graphData.data[action.payload].type = "start_s";
+    else state.graphData.data[action.payload].type = "end_s";
+    state.selectedNode = id;
+  },
+
   toggleWall: (state, action) => {
+    if (state.graphData.running || state.generationData.running) return;
     let id = action.payload;
     let { type, neighbors } = state.graphData.data[id];
 
@@ -46,13 +58,29 @@ export default {
           ),
         },
       };
-    } else if (!type.startsWith("start") && !type.startsWith("end")) {
+    } else if (!type.startsWith("start") && !type.startsWith("end") && state.selectedNode === undefined) {
       state.graphData.walls.push(id);
       state.graphData = {
         ...state.graphData,
         edges: { ...removeEdge(state.graphData.edges, id) },
       };
       state.graphData.data[id].type = "wall";
+    }
+
+    if (state.selectedNode !== undefined) {
+      let type, oldId;
+      if (state.selectedNode === state.graphData.start) {
+        oldId = state.graphData.start;
+        state.graphData.start = id;
+        type = "start";
+      } else {
+        oldId = state.graphData.end;
+        state.graphData.end = id;
+        type = "end";
+      }
+      state.graphData.data[oldId] = { ...state.graphData.data[oldId], type: "", value: Math.floor(100 * Math.random()) };
+      state.graphData.data[id] = { ...state.graphData.data[id], type, value: 0 };
+      state.selectedNode = undefined;
     }
   },
 

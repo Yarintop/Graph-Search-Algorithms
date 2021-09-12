@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleWall } from "../../logic/redux/graphSlice";
+import { selectNode, toggleWall } from "../../logic/redux/graphSlice";
 import { FormControlLabel, Paper } from "@material-ui/core";
 import "./MazeNode.css";
 
@@ -10,8 +10,14 @@ const getCSS = (type) => {
     case "start":
       cls += " start";
       break;
+    case "start_s":
+      cls += " start_s";
+      break;
     case "end":
       cls += " end";
+      break;
+    case "end_s":
+      cls += " end_s";
       break;
     case "wall":
       cls += " wall";
@@ -38,14 +44,21 @@ const MazeNode = (props) => {
   let weighted = useSelector(
     (state) => state.graph.generationData.weighted
   );
-  console.log(weighted);
+  // console.log(weighted);
   return (
     <Paper
+      draggable='false'
       id={props.id}
       key={props.id}
       className={getCSS(nodeState.type)}
-      onMouseDown={(e) => {
-        dispatch(toggleWall(props.id));
+      onMouseEnter={(e) => {
+        if (e.buttons === 1) 
+          if (nodeState.type === "start" || nodeState.type === "end") dispatch(selectNode(props.id));
+          else dispatch(toggleWall(props.id));
+      }}
+      onPointerDown={(e) => {
+        if (nodeState.type === "start" || nodeState.type === "end") dispatch(selectNode(props.id));
+        else dispatch(toggleWall(props.id));
       }}
       elevation={1}
     >

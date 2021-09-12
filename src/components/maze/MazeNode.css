@@ -10,8 +10,16 @@
     background-color: orange !important;
 }
 
+.start_s {
+    background: linear-gradient(135deg, orange 70%, white 30%);
+}
+
 .end {
     background-color: Tomato !important;
+}
+
+.end_s {
+    background: linear-gradient(135deg, Tomato 70%, white 30%);
 }
 
 .wall {
