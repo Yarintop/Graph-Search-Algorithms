@@ -78,7 +78,9 @@ export default {
         state.graphData.end = id;
         type = "end";
       }
-      state.graphData.data[oldId] = { ...state.graphData.data[oldId], type: "", value: Math.floor(100 * Math.random()) };
+      let weight = 0
+      if (state.generationData.weighted) weight = Math.floor(100 * Math.random())
+      state.graphData.data[oldId] = { ...state.graphData.data[oldId], type: "", value: weight };
       state.graphData.data[id] = { ...state.graphData.data[id], type, value: 0 };
       state.selectedNode = undefined;
     }
