@@ -7,7 +7,7 @@ The "Graph Algorithms Visualizer" is exactly how it sounds like,
 
 Web application for visualizing graph search algorithms such as BFS, DFS and Dijkstra. with maze generation algorithms such as Prim, Kruskal, etc.
 
-Deployed using Herokuapp [Here](https://graph-algorithms-visualizer.herokuapp.com/) (takes about 30 seconds to load if no one loaded it in the past 30 minutes)
+Deployed using Firebase [Here](https://graph-search-algorithms.web.app/)
 
 ## Maze Generation
 
